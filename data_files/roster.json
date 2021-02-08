@@ -1,0 +1,36 @@
+{
+  "_default": {
+    "1": {
+      "name": "tiger woods",
+      "rating": 98,
+      "owgr_points": 1,
+      "finishes": [
+        15,
+        25,
+        25
+      ],
+      "id": 732156825195
+    },
+    "2": {
+      "name": "rory mcilroy",
+      "rating": 97,
+      "owgr_points": 0,
+      "finishes": [],
+      "id": 873691758249
+    },
+    "3": {
+      "name": "jordan spieth",
+      "rating": 95,
+      "owgr_points": 0,
+      "finishes": [],
+      "id": 650537979817
+    },
+    "4": {
+      "name": "dustin johnson",
+      "rating": 96,
+      "owgr_points": 0,
+      "finishes": [],
+      "id": 274866497170
+    }
+  }
+}

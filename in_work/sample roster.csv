@@ -1,0 +1,10 @@
+sample roster
+
+{
+  name: tiger woods
+  id: 1
+  rating: 99
+  owgr: 3
+  owgr points: 250
+  finishes: [1,5,3,1,15...]
+}

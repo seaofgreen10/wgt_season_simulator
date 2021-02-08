@@ -1,0 +1,8 @@
+HOW-TO:
+
+Add player to roster
+  g = golfer('jordan spieth', True, 95)     : name, true to create new, rating
+
+create new tournament
+
+resume tournament

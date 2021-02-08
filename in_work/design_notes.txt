@@ -1,0 +1,103 @@
+-tourney tourney.py
+		...description: will progress in steps. first step plays entire thursday round, write out leaderboard to file. same for friday. saturday/sunday will loop thru individual groups one hole at a time w/o exiting program (print to console and wait for user input). option to play all sat/sun at once.
+
+	-game_tf[x] where x = 72?
+	-game_sat[x] where x = cut_made/2  35?
+	-game_sun[x] where x = cut_made/2  35
+	-course current_venue
+
+	~init(golfers[]): get course, set up pairings based on entry list text file or input param
+
+	~print_leaderboard()
+		-print full leaderboard to console
+	~save_leaderboard()
+		-save leaderboard to file (player,score,thru)
+	~_play_hole(game)
+		-sims 1 hole for pairing
+	~play_tf_round
+		-for each game: _play_hole()
+	~play_wknd_round
+		-needs logic to cascade _play_hole call
+		-needs attention
+
+
+-game game.py (necessary?)
+	...description: container for golfers. needed for tee times/steps
+	-golfer[2] golfers
+	~init
+
+-golfer golfer.py
+	...description: holds info for a single golfer. reads in historical as well as current tourney info (separate files)
+	-int player_id
+		-internal id for indexing
+	-int rating
+		-skill rating for sim
+	-int[4][18] scores
+		-holder for scores on a given tourney
+	-int thru
+
+	-int [] finishes
+		-list of finishes for year
+	-int owgr
+		-world ranking/points
+
+	~init: call parsers
+
+-parser parser.py
+	~_parse_current()
+		-parse csv for current tourney info, if any
+	~_parse_historical()
+		-parse owgr,
+
+
+-roster roster.py
+	-string [all_golfers][2]   (['name'][points])
+	~init: read in golfers and points
+	~print_owgr: sort list and print
+
+
+-course course.py
+	-string name
+	-int[18] handicaps
+	~init(string name): store name, read in handicaps based on name
+
+
+
+
+-main_interface main.py
+	-tourney current_tourney
+	-golfers[] list of golfers
+	~get tourney stats/leaderboard
+	~progress tourney state (thurs, fri, sat loop, sun loop)
+	~print_owgr
+	~get historical stats
+
+
+
+
+
+-sim algorithm
+		-input factors: golfer.rating, course.handicaps, random
+
+
+
+
+db definition:
+
+courses.json
+	-name
+	-handicaps []
+
+roster.json
+	-name
+	-rating
+	-owgr_points
+	-finishes
+	-id
+
+leaderboard.json
+	-name
+	-id
+	-score_to_par
+	-thru
+	-cut   :{y, n}
