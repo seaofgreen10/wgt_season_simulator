@@ -10,4 +10,5 @@ class state_info:
         # 18 + (x/2-1) where x=golfers made cut
         self.weekend_states = 18 + math.ceil(p_num_made_cut/2) - 1
 
-    
+    def increment_day():
+        day += 1
