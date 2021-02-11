@@ -52,4 +52,4 @@ def get_course(p_course_name):
 
 
 t = tournament('co open', 'gvr')
-#t.start_new_tournament()
+t.start_new_tournament()

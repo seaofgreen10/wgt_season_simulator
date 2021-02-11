@@ -1,0 +1,32 @@
+{
+  "_default": {
+    "1": {
+      "name": "tiger woods",
+      "id": 732156825195,
+      "score_to_par": 3,
+      "thru": 0,
+      "cut": "y"
+    },
+    "2": {
+      "name": "rory mcilroy",
+      "id": 873691758249,
+      "score_to_par": 1,
+      "thru": 0,
+      "cut": "n"
+    },
+    "3": {
+      "name": "dustin johnson",
+      "id": 274866497170,
+      "score_to_par": 2,
+      "thru": 0,
+      "cut": "n"
+    },
+    "4": {
+      "name": "jordan spieth",
+      "id": 650537979817,
+      "score_to_par": 4,
+      "thru": 0,
+      "cut": "y"
+    }
+  }
+}
