@@ -2,7 +2,6 @@ import tinydb
 import FINAL_VARS
 from game import game
 from course import course
-import leaderboard
 from state_info import state_info
 import db_obj
 import random
@@ -23,9 +22,6 @@ class tournament:
 
     # init method or constructor
     def __init__(self, p_name='', p_venue=''):
-        ## DEBUG: remove
-        self.get_cut_line()
-        return
 
         if p_name == '':
             # load any in-progress tournament
@@ -197,6 +193,16 @@ class tournament:
         return cut_line
 
 
+    ''' Functions for progressing through a tournament'''
+    def _step_weekday_rounds():
+        for game in self.weekday_games:
+            for golfer in game.golfers:
+                for hole in range(18):
+                    #TODO: SIM HOLES, fix this call once flushed out
+                    _play_hole()
+
+        # increment Day
+        self.state.increment_day()
 
     def finish_tournament(self):
         # rename leaderboard json using name/date/venue
