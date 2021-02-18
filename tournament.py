@@ -5,6 +5,7 @@ from course import course
 from state_info import state_info
 import db_obj
 import random
+import simulator as sim
 
 class tournament:
 
@@ -173,15 +174,15 @@ class tournament:
         ''' calls helper function to calculate cut line, then uses tinydb to update
         made_cut field in db. will reference this when setting up pairings, so
         no need to return anything '''
-        cut_line = self.get_cut_line()
+        cut_line = self._get_cut_line()
 
         # sel from db_obj.leaderboard_db where score_to_par <= cut_line
         #db.obj.
         db_obj.leaderboard_db.update({'cut': 'y'}, db_obj.Leaderboard.score_to_par > cut_line)
 
 
-    def get_cut_line(self):
-        '''cut is top 65 and anyone within 10 leader. calculate and return as int'''
+    def _get_cut_line(self):
+        '''cut is top 65. calculate and return as int'''
         # load leaderboard
         lb = db_obj.leaderboard_db.all()
 
@@ -193,8 +194,8 @@ class tournament:
         return cut_line
 
 
-    ''' Functions for progressing through a tournament'''
-    def _step_weekday_rounds():
+    ''' Functions for progressing through a tournament, to be called by runner'''
+    def step_weekday_rounds():
         for game in self.weekday_games:
             for golfer in game.golfers:
                 for hole in range(18):
@@ -203,6 +204,49 @@ class tournament:
 
         # increment Day
         self.state.increment_day()
+
+    def step_weekend_rounds():
+        # determine the correct game list based on day
+        game_list = self.sat_games if self.state.day == 2 else self.sun_games
+        games_on_course = []
+
+        for game in game_list:
+            # total_steps is (total_pairings + 17?)
+            total_steps = len(game_list) + 17
+
+            # for step in total_steps:
+            for step in range(total_steps):
+
+                # add new game if needed
+                if (step < len(game_list)):
+                    # still adding, games_on_course.add(game_list[step])
+                    games_on_course.append(game_list[step])
+
+                # sim one hole for everybody on the course
+                for game in games_on_course:
+                    for golfer in game.golfers:
+                        # play one hole TODO: update this call? who owns sim logic
+                        sim.simulate_one_hole()
+
+                    # print info? leaderboard
+
+                    # wait for keyboard input to continue TODO add user score input
+                    input("Press Enter to continue")
+
+                # remove finished game if needed
+                if (step >= 18):
+                    games_on_course.pop(0)
+
+
+
+
+    def adm_before_weekend_rounds(make_cuts):
+        '''make cuts (if parameter is true) and reorder pairings for weekend'''
+        if make_cuts:
+            self.make_cuts()
+
+        self._setup_weekend_pairings()
+
 
     def finish_tournament(self):
         # rename leaderboard json using name/date/venue
