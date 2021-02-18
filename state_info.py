@@ -6,9 +6,8 @@ class state_info:
     weekend_states = 0
     curr_state = 0
 
-    def calculate_states(self, p_num_made_cut):
-        # 18 + (x/2-1) where x=golfers made cut
-        self.weekend_states = 18 + math.ceil(p_num_made_cut/2) - 1
+    def calculate_steps(self, p_num_games):
+        self.weekend_states = 17 + p_num_made_cut
 
     def increment_day():
         day += 1
