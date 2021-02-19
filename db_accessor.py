@@ -4,6 +4,7 @@ from course import course
 from golfer import golfer
 from tournament import tournament
 import db_obj
+import random
 
 
 
@@ -35,16 +36,17 @@ def get_course(p_course_name):
     #insert_statement = '{\'name\': {}, \'handicaps\': {}}'.format(p_course_name, p_handicaps)
     #course_db.insert(insert_statement)
 
-#todo debug, remove
+######COURSE INFO
 #cour = get_course('Pebble Beach')
 #print("course: {}".format(cour.name))
 #hc = [1,3,5,7,9,11,13,15,17,2,4,6,8,10,12,14,16,18]
-#c = course('indian run', hc)
+#p = [4,4,4,3,5,3,4,5,4,4,3,4,4,5,3,5,4,4]
+#c = course('gvr', hc, p)
 #print("name {}, hc {}".format(c.name, c.handicaps))
 #c.export_course()
 #add_course('test', hc)
 
-
+#####GOLFER
 # DEBUG: golfer object
 # DEBUG: add golfer
 #g = golfer('dustin johnson', True, 96)
@@ -53,13 +55,26 @@ def get_course(p_course_name):
 #golfer.update_owgr('tiger woods', 1)
 #golfer.update_finishes('tiger woods', 25)
 
-
+#####TOURNEY
 #t = tournament('co open', 'gvr')
 #t.start_new_tournament()
 
-db_obj.leaderboard_db.update_multiple([
-                            (tinydb.operations.increment('thru'), db_obj.Leaderboard.id == 488472945319),
-                            ({'score_to_par' : 2}, db_obj.Leaderboard.id == 488472945319)
-                            ])
+
+#####LEADERBOARD
+#db_obj.leaderboard_db.update_multiple([
+#                            (tinydb.operations.increment('thru'), db_obj.Leaderboard.id == 488472945319),
+#                            ({'score_to_par' : 2}, db_obj.Leaderboard.id == 488472945319)
+#                            ])
 
 #db_obj.leaderboard_db.update(increment('thru'), db_obj.Leaderboard.id == 488472945319)
+
+
+
+
+#####ROSTER
+#2/22/21: iterating thru roster to update IDs
+#roster_list = db_obj.roster_db.all()
+#for g in roster_list:
+#    print(g['name'])
+#    id = random.randint(0, 999999999999)
+#    db_obj.roster_db.update({'id': id}, db_obj.Roster.name == g['name'])

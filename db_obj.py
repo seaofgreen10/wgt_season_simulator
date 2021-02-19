@@ -9,3 +9,6 @@ Tournament = tinydb.Query()
 
 roster_db = tinydb.TinyDB(FINAL_VARS.ROSTER_FILE_NAME)
 Roster = tinydb.Query()
+
+course_db = tinydb.TinyDB(FINAL_VARS.COURSES_FILE_NAME)
+Courses = tinydb.Query()
