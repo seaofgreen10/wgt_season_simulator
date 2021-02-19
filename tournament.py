@@ -18,6 +18,7 @@ class tournament:
     sun_games = []
     #
     state = state_info()
+    global course
 
     #leaderboard = leaderboard()
 
@@ -48,6 +49,8 @@ class tournament:
                             'day': self.state.day,
                             'curr_state' : self.state.curr_state,
                             'weekend_states' : self.state.weekend_states}
+
+            self.course = course(venue)
 
             print("Creating new tournament: " + str(insert_dict))
             db_obj.tournament_db.insert(insert_dict)
@@ -140,6 +143,7 @@ class tournament:
             self.state.day = tournament_info['day']
             self.state.curr_state = tournament_info['curr_state']
             self.state.weekend_states = tournament_info['weekend_states']
+            self.course = course(self.venue)
         else:
             print("""Error:tournament _get_existing_tournament_from_db:
                 Tournament {} not found in tournament json""".format(self.name))
@@ -195,7 +199,7 @@ class tournament:
 
 
     ''' Functions for progressing through a tournament, to be called by runner'''
-    def step_weekday_rounds():
+    def step_weekday_rounds(self):
         for game in self.weekday_games:
             for golfer in game.golfers:
                 for hole in range(18):
@@ -205,7 +209,7 @@ class tournament:
         # increment Day
         self.state.increment_day()
 
-    def step_weekend_rounds():
+    def step_weekend_rounds(self):
         # determine the correct game list based on day
         game_list = self.sat_games if self.state.day == 2 else self.sun_games
         games_on_course = []
@@ -226,7 +230,7 @@ class tournament:
                 for game in games_on_course:
                     for golfer in game.golfers:
                         # play one hole TODO: update this call? who owns sim logic
-                        sim.simulate_one_hole()
+                        sim.simulate_one_hole(golfer, self.course.handicaps[golfer.thru])
 
                     # print info? leaderboard
 
@@ -240,9 +244,9 @@ class tournament:
 
 
 
-    def adm_before_weekend_rounds(make_cuts):
+    def adm_before_weekend_rounds(self, b_make_cuts):
         '''make cuts (if parameter is true) and reorder pairings for weekend'''
-        if make_cuts:
+        if b_make_cuts:
             self.make_cuts()
 
         self._setup_weekend_pairings()
