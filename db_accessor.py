@@ -3,10 +3,13 @@ import FINAL_VARS
 from course import course
 from golfer import golfer
 from tournament import tournament
+import db_obj
 
 
-course_db = tinydb.TinyDB(FINAL_VARS.COURSES_FILE_NAME)
-Course = tinydb.Query()
+
+
+#course_db = tinydb.TinyDB(FINAL_VARS.COURSES_FILE_NAME)
+#Course = tinydb.Query()
 
 #debug seed data, #todo debug, remove
 #t1 = course_db.insert({'name': 'Pebble Beach', 'handicaps': '[1,3,5,7,9,11,13,15,17,2,4,6,8,10,12,14,16,18]'})
@@ -51,5 +54,12 @@ def get_course(p_course_name):
 #golfer.update_finishes('tiger woods', 25)
 
 
-t = tournament('co open', 'gvr')
-t.start_new_tournament()
+#t = tournament('co open', 'gvr')
+#t.start_new_tournament()
+
+db_obj.leaderboard_db.update_multiple([
+                            (tinydb.operations.increment('thru'), db_obj.Leaderboard.id == 488472945319),
+                            ({'score_to_par' : 2}, db_obj.Leaderboard.id == 488472945319)
+                            ])
+
+#db_obj.leaderboard_db.update(increment('thru'), db_obj.Leaderboard.id == 488472945319)
