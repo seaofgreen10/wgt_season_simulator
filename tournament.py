@@ -32,6 +32,7 @@ class tournament:
             # new tournament
             self.name = p_name
             self.venue = p_venue
+            start_new_tournament()
 
     def start_new_tournament(self):
         self.save_tournament_info()

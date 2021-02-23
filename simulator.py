@@ -2,11 +2,12 @@ import tinydb
 import db_obj
 
 
-"""
+"""Simulates one hole for one golfer
+
 Args:
-    golfer: the golfer playing the hole
-    handicap: the handicap of the current hole
-    par: the par of the current hole
+    golfer (golfer): the golfer playing the hole
+    handicap (int): the handicap of the current hole
+    par (int): the par of the current hole
 
 Returns:
     None
@@ -37,11 +38,12 @@ def simulate_one_hole(p_golfer, p_hc, p_par):
 
 
 
-"""
+"""Algorithm to calculate score on a hole
+
 Args:
-    rating: the golfer's rating
-    handicap: the handicap of the current hole
-    par: the par of the current hole
+    rating (int): the golfer's rating
+    handicap (int): the handicap of the current hole
+    par (int): the par of the current hole
 
 Returns:
     the calculated score for this hole

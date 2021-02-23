@@ -59,6 +59,7 @@
 -course course.py
 	-string name
 	-int[18] handicaps
+	-int[18] pars
 	~init(string name): store name, read in handicaps based on name
 
 
